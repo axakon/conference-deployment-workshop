@@ -10,16 +10,16 @@
     1. Press select to proceed
 1. #### Select Instance type
     1. Select "t3.micro" as our instance type as this is free tier eligible
-    1. Press select to proceed
+    1. Press "Next: Configure instance details" to proceed
 1. #### Instance configuration
     1. For this example default settings will be enough.
-    1. Press select to proceed
+    1. Press "Next: Add Storage" to proceed
 1. #### Add a storage
     1. For this example root volume will be enough.
-    1. Press select to proceed
+    1. Press "Next: Add Tags" to proceed
 1. #### Setting Tags
     1. Tags will not be used in this example
-    1. Press select to proceed
+    1. Press "Next: Configure security groups" to proceed
 1. #### Configure security groups
     1. Allow your IP to access via SSH
     1. Allow everyone to access via HTTP
@@ -47,7 +47,7 @@ sudo su ## To make subsequent commands as root
 apt-get update ## Update the package list
 apt-get install apache2 ## install apache2 webserver
 start server `service start apache2` ## start the webserver
-chown ubuntu /var/www/html ## CHange OWNer to ubuntu
+chown -R ubuntu /var/www/html ## CHange OWNer to ubuntu
 ```
 Now open a new terminal window on your computer.  
 Navigate to this project, run `yarn build` to output the project to the `build` directory.
@@ -58,6 +58,6 @@ scp -r -i <path_to_key_pair_file>.pem <path_to_project_root>/build/* ubuntu@<ins
 ```
 [Explanation](https://explainshell.com/explain?cmd=scp+-r+-i+den-fantastiska-hemsidan.pem+%2FUsers%2Frobingranstromkall%2FDevelopment%2Fdev-ops-presentation%2Fproject%2Fdeploy-demo%2Fbuild%2F*+ubuntu%40ec2-13-53-169-75.eu-north-1.compute.amazonaws.com%3A%2Fvar%2Fwww%2Fhtml)
 
-ssh in to instance again and run `service restart apache2`
+ssh in to instance again and run `service apache2 restart`
 
 Great success! Now view your page
