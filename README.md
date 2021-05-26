@@ -25,7 +25,7 @@
     1. Here we could add access via HTTPS, but since we won't bother with certificates it will not be needed
     1. Press "Review and Launch" to proceed
 1. #### Save key pair
-    1. Set a key pair name and download the key pair (.pem file), take note of where you save the .pem file
+    1. Set a key pair name and download the key pair (.pem file), take note of where you save the .pem file, (./ssh is a good place)
     1. Press "Launch Instance" to proceed
 
 ## Access instance 
@@ -42,19 +42,23 @@ ssh -i <path_to_key_pair_file> ubuntu@<public_ip_from_dashboard>
 You should now be in your newly created instance.
 Now we need to get the web server and give the ubuntu user (the one you logged in with) access to modify the `/var/www/html` directory
 ```bash
-sudo su
-apt-get update
-apt-get install apache2
-start server `service start apache2`
-chown ubuntu /var/www/html
+sudo su ## To make subsequent commands as root
+apt-get update ## Update the package list
+apt-get install apache2 ## install apache2 webserver
+start server `service start apache2` ## start the webserver
+chown ubuntu /var/www/html ## CHange OWNer to ubuntu
 ```
 Now open a new terminal window on your computer.  
-Navigate to this project, run `yarn build` to output the probect to the `build` directory.
+Navigate to this project, run `yarn build` to output the project to the `build` directory.
 Now we need to transfer the contents of that directory to the instance.  
-This could be done in several ways, one is with an FTP client and the other is with SCP (Secure CoPy)
+This could be done in several ways, one is with an SFTP client and the other is with SCP (Secure CoPy)
 ```bash
-scp -r -i den-fantastiska-hemsidan.pem /Users/robingranstromkall/Development/dev-ops-presentation/project/deploy-demo/build/* ubuntu@ec2-13-53-169-75.eu-north-1.compute.amazonaws.com:/var/www/html
+scp -r -i <path_to_key_pair_file>.pem <path_to_project_root>/build/* ubuntu@<instance_public_ip>:/var/www/html
 ```
+> explanation:  
+  -r for reqursive  
+  -i <path_to_key_pair_file> to mark identity file (.pem)
+
 ssh in to instance again and run `service restart apache2`
 
 Great success! Now view your page
