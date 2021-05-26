@@ -6,9 +6,10 @@
     1. Press "Launch instance" on the main page in EC2
 1. #### Select Amazon Machine Image
     1. Select "Ubuntu Server 18.04 LTS (HVM)" (free tier) as your Amazon Machine Image (AMI)
+    1. The important part here is that it is Linux and free tier
     1. Press select to proceed
 1. #### Select Instance type
-    1. Select "t2.micro" as our instance type as this is free tier eligible
+    1. Select "t3.micro" as our instance type as this is free tier eligible
     1. Press select to proceed
 1. #### Instance configuration
     1. For this example default settings will be enough.
