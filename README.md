@@ -55,9 +55,7 @@ This could be done in several ways, one is with an SFTP client and the other is 
 ```bash
 scp -r -i <path_to_key_pair_file>.pem <path_to_project_root>/build/* ubuntu@<instance_public_ip>:/var/www/html
 ```
-> explanation:  
-  -r for reqursive  
-  -i <path_to_key_pair_file> to mark identity file (.pem)
+[Explanation](https://explainshell.com/explain?cmd=scp+-r+-i+den-fantastiska-hemsidan.pem+%2FUsers%2Frobingranstromkall%2FDevelopment%2Fdev-ops-presentation%2Fproject%2Fdeploy-demo%2Fbuild%2F*+ubuntu%40ec2-13-53-169-75.eu-north-1.compute.amazonaws.com%3A%2Fvar%2Fwww%2Fhtml)
 
 ssh in to instance again and run `service restart apache2`
 
