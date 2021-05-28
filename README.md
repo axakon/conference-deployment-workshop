@@ -31,7 +31,7 @@
 
 ## Access instance 
 ### Adding ssh to config 
-Open `~/.ssh/config` and write
+Open `~/.ssh/config` and write (on windows c:\Users\.ssh)
 ```
 Host <alias>
 	Hostname <public_ip_from_dashboard>
