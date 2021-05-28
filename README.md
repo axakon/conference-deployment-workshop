@@ -30,6 +30,16 @@
     1. Press "Launch Instance" to proceed
 
 ## Access instance 
+### Adding ssh to config 
+Open `~/.ssh/config` and write
+```
+Host <alias>
+	Hostname <public_ip_from_dashboard>
+	User ubuntu
+	IdentityFile ~/.ssh/<path_to_key_pair_file>
+```
+This way you can use the ssh <alias>:
+
 Now you will need to SSH into your created instance.
 You can find the public ip for your instance on the EC2 instance dashboard.
 You'll need to change the permissions of the .pem file so only the root user can read it:
@@ -39,6 +49,8 @@ chmod 400 <path_to_key_pair_file>
 Then write the folowing to ssh to the instance
 ```bash
 ssh -i <path_to_key_pair_file> ubuntu@<public_ip_from_dashboard>
+or
+ssh <alias>
 ```
 You should now be in your newly created instance.
 Now we need to get the web server and give the ubuntu user (the one you logged in with) access to modify the `/var/www/html` directory
@@ -46,7 +58,7 @@ Now we need to get the web server and give the ubuntu user (the one you logged i
 sudo su ## To make subsequent commands as root
 apt-get update ## Update the package list
 apt-get install apache2 ## install apache2 webserver
-start server `service start apache2` ## start the webserver
+start server `service apache2 start` ## start the webserver
 chown -R ubuntu /var/www/html ## CHange OWNer to ubuntu
 ```
 Now open a new terminal window on your computer.  
@@ -55,6 +67,8 @@ Now we need to transfer the contents of that directory to the instance.
 This could be done in several ways, one is with an SFTP client and the other is with SCP (Secure CoPy)
 ```bash
 scp -r -i <path_to_key_pair_file>.pem <path_to_project_root>/build/* ubuntu@<instance_public_ip>:/var/www/html
+or
+scp -r <path_to_project_root>/build/* <alias>:/var/www/html
 ```
 [Explanation](https://explainshell.com/explain?cmd=scp+-r+-i+den-fantastiska-hemsidan.pem+%2FUsers%2Frobingranstromkall%2FDevelopment%2Fdev-ops-presentation%2Fproject%2Fdeploy-demo%2Fbuild%2F*+ubuntu%40ec2-13-53-169-75.eu-north-1.compute.amazonaws.com%3A%2Fvar%2Fwww%2Fhtml)
 
