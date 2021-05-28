@@ -38,7 +38,7 @@ Host <alias>
 	User ubuntu
 	IdentityFile ~/.ssh/<path_to_key_pair_file>
 ```
-This way you can use the ssh <alias>:
+This way you can use the ssh <alias> or scp <local_file>:
 
 Now you will need to SSH into your created instance.
 You can find the public ip for your instance on the EC2 instance dashboard.
@@ -58,7 +58,7 @@ Now we need to get the web server and give the ubuntu user (the one you logged i
 sudo su ## To make subsequent commands as root
 apt-get update ## Update the package list
 apt-get install apache2 ## install apache2 webserver
-start server `service apache2 start` ## start the webserver
+service apache2 start ## start the webserver
 chown -R ubuntu /var/www/html ## CHange OWNer to ubuntu
 ```
 Now open a new terminal window on your computer.  
